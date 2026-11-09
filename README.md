@@ -2,7 +2,7 @@
 
 > [!NOTE]
 > **Award-winning hackathon project, now being rebuilt as a local-first, zero-knowledge app.**
-> Try the live demo at [demo.accountmap.org](https://demo.accountmap.org). Your map stays in your browser and nothing is sent to a server.
+> Try the live demo at [demo.accountmap.org](https://demo.accountmap.org). Your map stays in your browser and is never uploaded.
 
 ![3D Map View](./public/screen.png)
 
@@ -39,7 +39,7 @@ This web application helps users manage their different login methods to each ac
 
 ## How to Run
 
-The hosted demo is now **frontend-only**: each browser keeps its own map in `localStorage`, nothing is sent to a server, and the recovery analysis runs in the browser. The data is not encrypted, so don't enter real accounts.
+The hosted demo is now **frontend-only**: each browser keeps its own map in `localStorage`, the map is never uploaded, and the recovery analysis runs in the browser. Service logos are fetched from Google's favicon service and Simple Icons by service name, and the data is not encrypted, so don't enter real accounts.
 
 ```sh
 cd frontend

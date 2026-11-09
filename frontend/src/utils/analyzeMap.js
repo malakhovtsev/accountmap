@@ -94,6 +94,6 @@ export const analyzeMap = ({ accounts, identities, links }) => {
     lines.push("**Looking good:** every account has at least two ways back in.");
   }
 
-  lines.push("This analysis ran entirely in your browser. Nothing was sent anywhere.");
+  lines.push("This analysis ran in your browser. Your map is never uploaded.");
   return lines.join("\n");
 };
