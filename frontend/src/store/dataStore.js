@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { getMap } from "./localDb";
 
 const useUserStore = create((set) => ({
   users: [],
@@ -6,15 +7,10 @@ const useUserStore = create((set) => ({
   error: null,
 
   fetchUsers: async () => {
-    set({ loading: true, error: null });
-
     try {
-      console.log("inside fetchUsers");
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/identities/map`);
-      const data = await res.json();
-      set({ users: data, loading: false });
-    } catch (err) {
-      set({ error: "Failed to fetch users", loading: false });
+      set({ users: getMap(), loading: false, error: null });
+    } catch {
+      set({ error: "Failed to load map", loading: false });
     }
   },
 }));

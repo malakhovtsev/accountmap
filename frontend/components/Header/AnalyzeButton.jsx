@@ -1,47 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 import NavButton from "./NavButton";
 import SeriousIcons from "../SeriousIcons";
-
-/** Circular spinner for loading state */
-const SpinnerIcon = ({ className = "" }) => (
-  <span className={`inline-block w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin ${className}`} aria-hidden />
-);
+import { getDb } from "../../src/store/localDb";
+import { analyzeMap } from "../../src/utils/analyzeMap";
 
 const AnalyzeButton = ({ onResult }) => {
-  const [isAnalyzing, setIsAnalyzing] = useState(false);
-
-  const handleAnalyze = async () => {
-    if (isAnalyzing) return;
-    setIsAnalyzing(true);
-    onResult(null);
-
+  const handleAnalyze = () => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/analyze`);
-      const data = await response.text();
-      if (!response.ok && data.includes("Someone used Gemini API keys already")) {
-        onResult(data);
-        return;
-      }
-      if (!response.ok) {
-        onResult(data || `Error: ${response.status}`);
-        return;
-      }
-      onResult(data);
+      onResult(analyzeMap(getDb()));
     } catch (err) {
       onResult(`Error: ${err.message}`);
-    } finally {
-      setIsAnalyzing(false);
     }
   };
 
   return (
     <NavButton
       onClick={handleAnalyze}
-      disabled={isAnalyzing}
-      icon={isAnalyzing ? SpinnerIcon : SeriousIcons.Sparkle}
-      label="AI Analyze"
-      subtext="Run pattern analysis on your map."
-      colorClass={isAnalyzing ? "bg-blue-600/10" : "bg-white/5"}
+      icon={SeriousIcons.Sparkle}
+      label="Analyze"
+      subtext="Find single points of failure. Runs in your browser."
+      colorClass="bg-white/5"
       iconColor="text-blue-400"
     />
   );

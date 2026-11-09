@@ -1,31 +1,20 @@
 import { create } from "zustand";
+import useUserStore from "./dataStore";
+import { bulkAddAccounts } from "./localDb";
 
 const updateDataStore = create((set) => ({
-  accounts: [],
   loading: false,
   error: null,
-
-  setAccounts: (accounts) => set({ accounts }),
 
   uploadBulkAccounts: async (accounts) => {
     set({ loading: true, error: null });
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts/bulk`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(accounts),
-      });
-      const data = await res.json().catch(() => ({}));
-      if (!res.ok) {
-        const msg = data.message || data.error || "Upload failed";
-        set({ error: msg, loading: false });
-        throw new Error(msg);
-      }
-      set({ accounts: data, loading: false });
-      return data;
+      const result = bulkAddAccounts(accounts);
+      await useUserStore.getState().fetchUsers();
+      set({ loading: false });
+      return result;
     } catch (err) {
-      if (err.message) set({ error: err.message, loading: false });
-      else set({ error: "Failed to upload accounts", loading: false });
+      set({ error: err.message || "Failed to upload accounts", loading: false });
       throw err;
     }
   },

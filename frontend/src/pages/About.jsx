@@ -13,7 +13,7 @@ const About = () => {
       tags: ["System Design", "Trello administration", "React", "Force-Graph", "Tailwind", "Full-stack refactoring", "Deployment"],
       socials: { 
         website: "https://andrii-malakhovtsev.com/", 
-        github: "https://github.com/andrii-malakhovtsev",
+        github: "https://github.com/malakhovtsev",
         linkedin: "https://www.linkedin.com/in/andrii-malakhovtsev/", 
         email: "mailto:andrii.malakhovtsev@gmail.com", 
         discord: "andrii.mal" 

@@ -1,5 +1,9 @@
 # Account Map • Hackathon Version Polished
 
+> [!NOTE]
+> **Award-winning hackathon project, now being rebuilt as a local-first, zero-knowledge app.**
+> Try the live demo at [demo.accountmap.org](https://demo.accountmap.org). Your map stays in your browser and nothing is sent to a server.
+
 ![3D Map View](./public/screen.png)
 
 ## Description
@@ -35,64 +39,28 @@ This web application helps users manage their different login methods to each ac
 
 ## How to Run
 
-### Prerequisites
-
-- Docker and Docker Compose Installed
-- Node.js 24+ (for local development without Docker)
-- Git
-
-### Steps
-
-1. Clone the Repository `git clone https://github.com/andrii-malakhovtsev/accountmap.git`
-
-2. Install Docker
-
-3. Set Working Directory `cd accountmap`
-
-4. Docker Compose `docker compose up -d`
-
-5. See the frontend at `http://localhost:8080`
-   - Frontend: <http://localhost:8080>
-   - Backend API: <http://localhost:8081>
-   - PostgreSQL: <http://localhost:5432>
-
-6. Stop all services `docker compose down`
-
-7. Clean up volumes `docker compose down -v`
-
-### Local Development
-
-#### Backend Setup
-
-```sh
-cd backend
-npm install
-npm start
-```
-
-Required environment variables (or use defaults):
-
-```sh
-PORT=8081
-DATABASE_URL=postgres://demouser:demopass@postgres:5432/demodb
-GEMINI_API_KEY=key
-```
-
-#### Frontend Setup
+The hosted demo is now **frontend-only**: each browser keeps its own map in `localStorage`, nothing is sent to a server, and the recovery analysis runs in the browser. The data is not encrypted, so don't enter real accounts.
 
 ```sh
 cd frontend
 npm install
-npm run dev
+npm run dev      # http://localhost:5173
+npm run build    # static site in frontend/dist
 ```
 
-#### Environment variable
+### Original full-stack version
+
+The version judged at the hackathon used an Express + Prisma + PostgreSQL backend with a Gemini analysis endpoint. That code is still in [`backend/`](./backend) for reference, but the frontend no longer calls it. To run the full-stack version as it was, check out a tag:
+
+- [`v0.1.0-hackathon`](../../tree/v0.1.0-hackathon): the submission as judged (Feb 6–7, 2026, ~23 hours)
+- [`v0.2.0-polished`](../../tree/v0.2.0-polished): post-hackathon polish, last full-stack version
 
 ```sh
-REACT_APP_API_URL=<http://localhost:8081>
+git checkout v0.2.0-polished
+docker compose up -d   # frontend :8080, backend :8081, postgres :5432
 ```
 
-## Architecture
+## Original Architecture (full-stack version)
 
 ```
 _______________________________________

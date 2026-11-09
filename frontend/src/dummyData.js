@@ -1,79 +1,78 @@
-export const dummyConnections = [
-  {
-    id: 'h1',
-    name: 'gmail',
-    value: 'work@nexus.io',
-    type: 'mail',
-    accounts: [
-      { id: 'a1', name: 'Netflix', username: 'dev-lead', notes: 'Corporate plan' },
-      { id: 'a2', name: 'AWS', username: 'root-admin', notes: 'Prod env' },
-      { id: 'a3', name: 'Slack', username: 'nexus-team', notes: 'Workspace owner' },
-      { id: 'a6', name: 'Vercel', username: 'deploy-bot' },
-      { id: 'a7', name: 'Sentry', username: 'error-monitor' },
-      { id: 'a8', name: 'Linear', username: 'pm-nexus' },
-      { id: 'a9', name: 'Figma', username: 'design-lead' },
-      { id: 'a10', name: 'Zoom', username: 'meetings@nexus.io' }
-    ]
-  },
-  {
-    id: 'h2',
-    name: 'apple',
-    value: '+1 (555) 000-1111',
-    type: 'phone',
-    accounts: [
-      { id: 'a1', name: 'Netflix', username: 'dev-lead' },
-      { id: 'a4', name: 'Stripe', username: 'finance-mgr' },
-      { id: 'a11', name: 'Twitter', username: 'nexus_io_official' },
-      { id: 'a12', name: 'Discord', username: 'mod_nexus' },
-      { id: 'a13', name: 'Instagram', username: 'nexus_social' }
-    ]
-  },
-  {
-    id: 'h3',
-    name: 'authy',
-    value: 'Authenticator App',
-    type: 'auth',
-    accounts: [
-      { id: 'a2', name: 'AWS', username: 'root-admin' },
-      { id: 'a5', name: 'GitHub', username: 'dev-ops' },
-      { id: 'a14', name: 'Cloudflare', username: 'dns-admin' },
-      { id: 'a15', name: 'DigitalOcean', username: 'droplet-user' },
-      { id: 'a16', name: 'Postman', username: 'api-tester' }
-    ]
-  },
-  {
-    id: 'h4',
-    name: 'yubico',
-    value: 'Security Key 5C',
-    type: 'auth',
-    accounts: [
-      { id: 'a2', name: 'AWS', username: 'root-admin' },
-      { id: 'a5', name: 'GitHub', username: 'dev-ops' },
-      { id: 'a17', name: 'Bitbucket', username: 'repo-owner' },
-      { id: 'a18', name: 'Coinbase', username: 'crypto-nexus' }
-    ]
-  },
-  {
-    id: 'h5',
-    name: 'protonmail',
-    value: 'recovery-nexus@proton.me',
-    type: 'mail',
-    accounts: [
-      { id: 'a5', name: 'GitHub', username: 'dev-ops' },
-      { id: 'a14', name: 'Cloudflare', username: 'dns-admin' },
-      { id: 'a19', name: 'Namecheap', username: 'domain-registrar' },
-      { id: 'a20', name: 'Vultr', username: 'backup-vps' }
-    ]
-  },
-  {
-    id: 'h6',
-    name: 'googleauthenticator',
-    value: 'Soft Token',
-    type: 'auth',
-    accounts: [
-      { id: 'a4', name: 'Stripe', username: 'finance-mgr' },
-      { id: 'a21', name: 'Heroku', username: 'legacy-apps' },
-      { id: 'a22', name: 'Twilio', username: 'sms-admin' }
-    ]
-  }
+/**
+ * Sample map loaded on a visitor's first visit (and after "Reset Demo").
+ * A made-up student / early-career person, with a few realistic risks built in
+ * so the Analyze button has something to find:
+ *  - most accounts recover through one Gmail address
+ *  - several money and social apps recover by SMS only
+ *  - school accounts tied to a university email that goes away after graduation
+ *  - old accounts with no recovery method at all
+ */
+
+export const sampleIdentities = [
+  { id: "gmail", type: "MAIL", value: "alex.rivera@gmail.com" },
+  { id: "icloud", type: "MAIL", value: "alex.r@icloud.com" },
+  { id: "school", type: "MAIL", value: "rivera.12@university.edu" },
+  { id: "phone", type: "PHONE", value: "+1 (555) 201-4477" },
+  { id: "totp", type: "AUTH", value: "Google Authenticator" },
+  { id: "yubikey", type: "AUTH", value: "YubiKey 5C" },
+];
+
+// recovery: ids of the identities that can get you back into the account
+export const sampleAccounts = [
+  // Core accounts that protect everything else
+  { name: "Google", username: "alex.rivera", recovery: ["phone", "icloud", "yubikey"], notes: "Gmail, YouTube, Drive" },
+  { name: "Apple", username: "alex.r@icloud.com", recovery: ["phone", "yubikey"], notes: "Apple ID, iCloud backups" },
+  { name: "Microsoft", username: "alex.rivera@outlook.com", recovery: ["gmail"] },
+
+  // Money
+  { name: "Chase", username: "arivera", recovery: ["gmail", "phone", "totp"], notes: "Checking + credit card" },
+  { name: "Bank of America", username: "alexr_boa", recovery: ["phone"] },
+  { name: "Venmo", username: "@alex-rivera", recovery: ["phone"] },
+  { name: "Cash App", username: "$alexr", recovery: ["phone"] },
+  { name: "PayPal", username: "alex.rivera@gmail.com", recovery: ["gmail", "totp"] },
+  { name: "Robinhood", username: "alex.rivera@gmail.com", recovery: ["gmail", "totp"] },
+  { name: "Coinbase", username: "alex.rivera@gmail.com", recovery: ["yubikey", "totp"] },
+
+  // Social
+  { name: "Instagram", username: "@alex.rvr", recovery: ["gmail"] },
+  { name: "Facebook", username: "alex.rivera.92", recovery: ["gmail", "phone"] },
+  { name: "X", username: "@alexrvr", recovery: ["gmail"] },
+  { name: "TikTok", username: "@alexrvr", recovery: ["phone"] },
+  { name: "Snapchat", username: "alexr_snaps", recovery: ["phone"] },
+  { name: "Reddit", username: "u/quietcompiler", recovery: ["gmail"] },
+  { name: "Discord", username: "alexr#2207", recovery: ["gmail", "totp"] },
+  { name: "LinkedIn", username: "alex-rivera-dev", recovery: ["school"], notes: "Signed up with school email" },
+  { name: "WhatsApp", username: "+1 (555) 201-4477", recovery: ["phone"] },
+
+  // Streaming
+  { name: "Netflix", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+  { name: "Spotify", username: "alexrivera", recovery: ["gmail"], notes: "Student discount via school email" },
+  { name: "Disney Plus", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+  { name: "Hulu", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+  { name: "Twitch", username: "quietcompiler", recovery: ["gmail", "totp"] },
+
+  // Shopping & everyday
+  { name: "Amazon", username: "alex.rivera@gmail.com", recovery: ["gmail", "phone"] },
+  { name: "eBay", username: "alexr_deals", recovery: ["gmail"] },
+  { name: "Uber", username: "+1 (555) 201-4477", recovery: ["phone"] },
+  { name: "DoorDash", username: "alex.rivera@gmail.com", recovery: ["gmail", "phone"] },
+  { name: "Airbnb", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+
+  // Gaming
+  { name: "Steam", username: "quietcompiler", recovery: ["gmail", "totp"] },
+  { name: "Epic Games", username: "QuietCompiler", recovery: ["gmail"] },
+  { name: "PlayStation", username: "QuietCompiler_", recovery: ["gmail"] },
+  { name: "Xbox", username: "QuietCompiler", recovery: ["gmail"], notes: "Uses the Microsoft account" },
+
+  // School & work
+  { name: "Canvas", username: "rivera.12", recovery: ["school"] },
+  { name: "Handshake", username: "rivera.12@university.edu", recovery: ["school"], notes: "Job applications" },
+  { name: "GitHub", username: "alexrivera-dev", recovery: ["gmail", "totp", "yubikey"] },
+  { name: "Slack", username: "rivera.12@university.edu", recovery: ["school"] },
+  { name: "Notion", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+  { name: "Dropbox", username: "alex.rivera@gmail.com", recovery: ["gmail"] },
+
+  // Forgotten accounts with no recovery method
+  { name: "Yahoo", username: "alexr_2009", recovery: [], notes: "Old account, recovery email long gone" },
+  { name: "Tumblr", username: "pixel-alex", recovery: [] },
 ];

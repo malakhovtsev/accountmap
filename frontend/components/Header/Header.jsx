@@ -5,6 +5,7 @@ import AddAccount from "./AddAccount";
 import AddConnection from "./AddConnection";
 import UploadCSV from "./UploadCSV";
 import AnalyzeButton from "./AnalyzeButton";
+import ResetDemo from "./ResetDemo";
 import NavButton from "./NavButton";
 import SeriousIcons from "../SeriousIcons";
 
@@ -140,6 +141,7 @@ const Header = ({
                   <div className="h-6 border-r border-white/10 mx-1" />
                   <UploadCSV />
                   <AnalyzeButton onResult={setAnalysisResult} />
+                  <ResetDemo onReset={() => setAnalysisResult(null)} />
                 </div>
               )}
             </div>
@@ -232,7 +234,7 @@ const Header = ({
           }}
         >
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '10px 16px', borderBottom: '1px solid rgba(255,255,255,0.1)', flexShrink: 0, gap: 8 }}>
-            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#3b82f6', textTransform: 'uppercase' }}>AI Analysis</span>
+            <span style={{ fontSize: 9, fontWeight: 800, letterSpacing: '0.2em', color: '#3b82f6', textTransform: 'uppercase' }}>Recovery Analysis</span>
             <div style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
               <button
                 type="button"

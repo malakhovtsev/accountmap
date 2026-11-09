@@ -83,7 +83,7 @@ const sanitizeAndNormalize = (data) => {
         subtext={
           <>
             <span className="text-slate-500">Safe upload: Passwords are auto-deleted. </span>
-            <span className="text-amber-400 font-semibold">Demo shares one account for everyone — don&apos;t upload real data.</span>
+            <span className="text-amber-400 font-semibold">Stays in this browser, unencrypted. Don&apos;t upload real data.</span>
           </>
         }
         colorClass="bg-white/5 hover:bg-white/10"
