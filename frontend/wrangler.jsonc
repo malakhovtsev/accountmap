@@ -2,6 +2,8 @@
 {
   "name": "accountmap-demo",
   "compatibility_date": "2025-09-01",
+  // Attaches the domain on deploy (creates the DNS record in the accountmap.org zone).
+  "routes": [{ "pattern": "demo.accountmap.org", "custom_domain": true }],
   "assets": {
     "directory": "./dist",
     // Unknown paths like /about or /list fall back to index.html so React Router handles them.
